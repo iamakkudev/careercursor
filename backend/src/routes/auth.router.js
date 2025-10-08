@@ -4,6 +4,7 @@ import { isLoggedIn } from '../middleware/auth.middleware.js';
 import { limiter } from '../middleware/expressRateLimit.js';
 const router = express.Router()
 
+//todo:update authentication with gmail /facebook
 router.post("/signup",limiter(5),signup)
 router.post("/login",limiter(5),login)
 router.post("/logout", logout)

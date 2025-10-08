@@ -1,5 +1,8 @@
 import { aiGovJob, aiMoreJob, aiPassionJob,aiPrivateJob, aiQualifyJob} from "./ai.controller.js"
 
+export const addJoblist = async(req,res)=>{
+    req.status(200).send("hello")
+}
 export const privateJobs = async(req,res)=>{
     try {
         const response = await aiPrivateJob()
@@ -37,7 +40,7 @@ export const govJobs = async(req,res)=>{
 
 export const passionJobs = async(req,res)=>{
     try {
-        const { prompt } = req.query
+        const { prompt } = req.body
 
         if(!prompt) return res.status(400).json({message:"Please Enter Your Interest"})
         
@@ -59,11 +62,8 @@ export const passionJobs = async(req,res)=>{
 
 export const qualifyJobs = async(req,res)=>{
     try {
-        const { basic,ug,pg,pc,mc } = req.query
+        const { qualify } = req.body
 
-        if(!basic && !ug && !pg && !pc && !mc) return res.status(400).json({message:"Please  select at least one Qualification"})
-
-        const qualify = [basic, ug, pg, pc, mc].filter(Boolean);
         if (qualify.length === 0) return res.status(400).json({ message: "Please select at least one qualification." });
 
 

@@ -15,7 +15,7 @@ const parseAIResponse = (response) => {
 export const aiPassionJob = async(prompt) =>{
    
         const response = await safeOpenRouterCall( {
-        model: 'deepseek/deepseek-chat-v3-0324:free',
+        model: 'deepseek/deepseek-chat-v3.1:free',
         messages: [
             {
             role: "system",
@@ -35,7 +35,7 @@ export const aiPassionJob = async(prompt) =>{
                 },
             {
             role: "user",
-            content: `I like ${prompt}`
+            content: `I like ${prompt.join(", ")}`
             }
         ]
         })
@@ -48,7 +48,7 @@ export const aiPassionJob = async(prompt) =>{
 export const aiPrivateJob = async() =>{
    
         const response = await safeOpenRouterCall( {
-        model: 'meta-llama/llama-3.2-3b-instruct:free',
+        model: 'deepseek/deepseek-chat-v3.1:free',
         messages: [
             {
             role: "system",
@@ -174,7 +174,7 @@ export const aiMoreJob = async(userInput) =>{
 export const aiRoadmap = async(job) =>{
    
         const response = await safeOpenRouterCall( {
-        model: 'deepseek/deepseek-chat-v3-0324:free', 
+        model: 'deepseek/deepseek-chat-v3.1:free', 
         messages: [
             {
             role: "system",
