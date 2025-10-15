@@ -15,7 +15,7 @@ const parseAIResponse = (response) => {
 export const aiPassionJob = async(prompt) =>{
    
         const response = await safeOpenRouterCall( {
-        model: 'deepseek/deepseek-chat-v3.1:free',
+        model: 'tngtech/deepseek-r1t2-chimera:free',
         messages: [
             {
             role: "system",
@@ -174,7 +174,7 @@ export const aiMoreJob = async(userInput) =>{
 export const aiRoadmap = async(job) =>{
    
         const response = await safeOpenRouterCall( {
-        model: 'deepseek/deepseek-chat-v3.1:free', 
+        model: 'tngtech/deepseek-r1t2-chimera:free', 
         messages: [
             {
             role: "system",
