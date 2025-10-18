@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 const RoadmapPage = () => {
   const [mounted, setMounted] = useState(false);
 
-  const { job,roadmapData, error, isLoading } = useRoadmapStore()
+  const { job, error, isLoading } = useRoadmapStore()
   const newerror = error || "Data not available";
   useEffect(() => {
     if (roadmapData) setMounted(true);
@@ -19,7 +19,7 @@ const RoadmapPage = () => {
   if(error||!roadmapData) return <div className='text-center font-bold text-red-600 text-xl my-auto'>{newerror}</div>
 
   return (
-    <div className="w-full py-4 flex flex-col items-center">
+    <div className="w-full py-4 px-6 flex flex-col items-center">
       
       {/* Job Title */}
       <motion.div  

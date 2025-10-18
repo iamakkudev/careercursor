@@ -63,8 +63,10 @@ export const passionJobs = async(req,res)=>{
 export const qualifyJobs = async(req,res)=>{
     try {
         const { qualify } = req.body
+        if (!Array.isArray(qualify) || qualify.length === 0) {
+        return res.status(400).json({ message: "Please select at least one qualification." });
+        }
 
-        if (qualify.length === 0) return res.status(400).json({ message: "Please select at least one qualification." });
 
 
         const response = await aiQualifyJob(qualify)

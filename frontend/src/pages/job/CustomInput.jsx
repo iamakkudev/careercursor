@@ -3,27 +3,31 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const CustomInput = () => {
-  const [input, setInput] = useState("");   // controlled input
-
+  const [input, setInput] = useState(""); // controlled input
   const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (input.trim() === "") return;
-    
-    await getJobRoadmap(input);
-    navigate("/roadmap");
-    };
+
+    try {
+      await getJobRoadmap(input.trim());
+      navigate("/roadmap");
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong. Please try again.");
+    }
+  };
   return (
     <div className="w-full min-h-screen my-4 pt-8 flex flex-col items-center">
-      <div className="text-6xl w-[40%] leading-20 text-center font-bold mb-6 opacity-95">
+      <div className="text-5xl md:text-6xl w-[80%] md:w-[40%] mb-20 leading-20 text-center font-bold opacity-95">
         Get the Roadmap for the Job YOU WANT!
       </div>
 
     
       {/* Input */}
       <form onSubmit={handleSubmit} className="w-full flex flex-col items-center gap-10">
-      <div className="relative mt-6 w-[70%]">
+      <div className="relative mt-6 w-[90%] md:w-[70%]">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <User className="size-10 text-violet-600/70 z-30" />
         </div>

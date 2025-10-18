@@ -4,7 +4,7 @@ import { X } from 'lucide-react';
 
 const InterestList = ({removeInterest,interest}) => {
   return (
-    <div className="w-[70%] flex flex-wrap p-2">
+    <div className="w-[90%] md:w-[70%] flex flex-wrap p-2">
                 <AnimatePresence>
                 {interest.map((item, index) => (
                   <motion.div

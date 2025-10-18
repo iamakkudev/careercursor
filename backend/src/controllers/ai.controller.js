@@ -109,7 +109,7 @@ export const aiGovJob = async() =>{
 export const aiQualifyJob = async(qualify) =>{
    
         const response = await safeOpenRouterCall( {
-        model: 'meta-llama/llama-3.2-3b-instruct:free', 
+        model: 'tngtech/deepseek-r1t2-chimera:free', 
         messages: [
             {
             role: "system",

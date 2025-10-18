@@ -12,12 +12,12 @@ const ProtectedRoute = ({ children }) => {
   
 
   if (!isAuthenticated) {
-    return children;
+    
     return <Navigate to='/login' replace />;
   }
 
   if (!user.isVerified) {
-    return children;
+
     return <Navigate to='/verify-email' replace />;
   }
 

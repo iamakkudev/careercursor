@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import QualificationCard from "../../components/QualificationCard";
 import { X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useJoblistStore } from "../../store/joblistStore";
 
 const QualifyInput = () => {
   const [open, setOpen] = useState({
@@ -19,14 +21,24 @@ const QualifyInput = () => {
     ad:""
 
   })
+  const { getQualifyJoblist } = useJoblistStore();
 
-  let arr = [];
+  const navigate = useNavigate();
+
+
+  let arr = useRef([]);
 
   // helper function to handle clicks
   const handleClick = (boxName) => {
     // if clicked on Illiterate
     if (boxName === "iliterate") {
       setOpen({ iliterate: true, openBox: "" });
+      setQualify({
+        basic: { sec: "", ssec: "" },
+        ug: "",
+        pg: "",
+        ad: ""
+      });
       return;
     }
 
@@ -36,25 +48,37 @@ const QualifyInput = () => {
       openBox: prev.openBox === boxName ? "" : boxName,
     }));
   };
-  const handleSubmit = () =>{
-  setSubmit(true);
-  const allEmpty =
-    !open.iliterate &&
-    Object.values(qualify).every((q) =>
-      typeof q === "string"
-        ? q.trim() === ""
-        : Object.values(q).every((v) => v.trim() === "")
-    );
+ const handleSubmit = () => {
+      setSubmit(true);
 
-  setValidate(!allEmpty);
+      const isIlliterate = open.iliterate;
+      const isFilled = Object.values(qualify).some((q) =>
+        typeof q === "string"
+          ? q.trim() !== ""
+          : Object.values(q).some((v) => v.trim() !== "")
+      );
+
+      if (!isIlliterate && !isFilled) {
+        setValidate(false);
+        return;
+      }
+
+      setValidate(true);
+
+      const allValues = Object.values(qualify).flatMap((q) =>
+        typeof q === "string"
+          ? q.trim() !== "" ? [q.trim()] : []
+          : Object.values(q).filter((v) => v.trim() !== "")
+      );
+
+      arr.current = isIlliterate ? ["Illiterate"] : allValues;
+    };
 
 
-  arr = Object.values(qualify).flatMap((q) =>
-    typeof q === "string"
-      ? q.trim() !== "" ? [q.trim()] : []
-      : Object.values(q).filter((v) => v.trim() !== "")
-  );
-    console.log(arr)
+  const handleConfirm = async() =>{
+    
+    navigate(`/joblist?q=qualify`);
+    await getQualifyJoblist(arr.current);
   }
 
   const isOpen = (box) => open.openBox === box;
@@ -73,7 +97,9 @@ const QualifyInput = () => {
             className="p-4 text-2xl "
             >Please Enter the Details</div>:
             <div className=" p-4">
-              <div className="text-xl font-bold text-center  text-violet-800 mb-4">
+              <div 
+              
+              className="text-xl font-bold text-center  text-violet-800 mb-4">
                 Confirm Your Qualification
               </div>
               
@@ -89,7 +115,7 @@ const QualifyInput = () => {
               </div>
               }
               <button
-              onClick={() => setSubmit(false)}
+              onClick={handleConfirm}
               className="px-6 py-2 mt-4 bg-violet-700 text-white rounded-md hover:bg-violet-800 transition"
               >
               Confirm
