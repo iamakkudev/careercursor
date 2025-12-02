@@ -8,11 +8,10 @@ import dotenv from 'dotenv'
 import authRoutes from './routes/auth.router.js'
 import jobRoutes from './routes/job.router.js'
 import roadmapRoutes from './routes/roadmap.router.js'
-import { fileURLToPath } from 'url'
 
 dotenv.config()
 
-const __dirname = path.resolve
+const __dirname = path.resolve();
 
 const app = express()
 const PORT = process.env.PORT || 8080
