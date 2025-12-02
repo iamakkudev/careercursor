@@ -2,7 +2,7 @@ import React from 'react'
 
 const PrivateJob = () => {
   return (
-    <div>PrivateJob</div>
+    <div>Page Not ready</div>
   )
 }
 

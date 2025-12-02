@@ -2,7 +2,7 @@ import React from 'react'
 
 const GovJob = () => {
   return (
-    <div>GovJob</div>
+    <div>Page not Ready</div>
   )
 }
 

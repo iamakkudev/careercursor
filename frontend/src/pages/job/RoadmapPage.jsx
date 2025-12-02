@@ -1,13 +1,12 @@
 import PhaseCard from '../../components/PhaseCard'
 import { useRoadmapStore } from '../../store/roadmapStore.js';
-// import {roadmapData} from '../../info.js'
 import {motion} from 'motion/react'
 import { useEffect, useState } from 'react';
 
 const RoadmapPage = () => {
   const [mounted, setMounted] = useState(false);
 
-  const { job, error, isLoading,get } = useRoadmapStore()
+  const { job, error, isLoading,roadmapData } = useRoadmapStore()
   const newerror = error || "Data not available";
   useEffect(() => {
     if (roadmapData) setMounted(true);
@@ -18,9 +17,9 @@ const RoadmapPage = () => {
 
   return (
     <div className="w-full py-4 px-6 flex flex-col items-center">
-      
+
       {/* Job Title */}
-      <motion.div  
+      <motion.div
       initial={{ opacity: 0, y: -20 }}
       animate={mounted ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5 }}
@@ -30,7 +29,7 @@ const RoadmapPage = () => {
       </motion.div >
 
       {/* About Section */}
-      <motion.div 
+      <motion.div
       initial={{opacity: 0,y:-20}}
       animate={{opacity: 1,y:0,}}
       transition={{duration:1, delay:.2,ease: [0.25, 0.46, 0.45, 0.94]}}
@@ -54,7 +53,7 @@ const RoadmapPage = () => {
       </motion.div >
 
       {/* Phases */}
-      <motion.div 
+      <motion.div
           initial={{opacity: 0,y:20}}
           animate={{opacity: 1,y:0,}}
           transition={{duration:1, delay:.4,ease: [0.25, 0.46, 0.45, 0.94]}}

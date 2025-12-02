@@ -33,8 +33,8 @@ const PassionInput = () => {
     if (interest.length === 0) return alert("Please add at least one interest!");
 
     try {
-      await getPassionJoblist(interest); // fetch first
       navigate(`/joblist?q=passion`);
+      await getPassionJoblist(interest); // fetch first
     } catch (err) {
       console.error(err);
       alert("Something went wrong. Please try again.");

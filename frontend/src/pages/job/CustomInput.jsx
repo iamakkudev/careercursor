@@ -1,15 +1,17 @@
 import { User } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {useRoadmapStore} from '../../store/roadmapStore.js'
 
 const CustomInput = () => {
   const [input, setInput] = useState(""); // controlled input
   const navigate = useNavigate();
 
+  const {getJobRoadmap} = useRoadmapStore();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (input.trim() === "") return;
-
     try {
       await getJobRoadmap(input.trim());
       navigate("/roadmap");
@@ -24,14 +26,14 @@ const CustomInput = () => {
         Get the Roadmap for the Job YOU WANT!
       </div>
 
-    
+
       {/* Input */}
       <form onSubmit={handleSubmit} className="w-full flex flex-col items-center gap-10">
       <div className="relative mt-6 w-[90%] md:w-[70%]">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <User className="size-10 text-violet-600/70 z-30" />
         </div>
-        
+
           <input
             type="text"
             placeholder="Please Enter The Job!"
@@ -51,7 +53,7 @@ const CustomInput = () => {
             Submit
           </button>
 
-         
+
         </div>
       </form>
     </div>
