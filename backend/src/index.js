@@ -1,4 +1,5 @@
 import cors from 'cors'
+import path from 'path'
 import session from 'express-session'
 import express from 'express'
 import {connectDB} from './lib/connectDB.js'
