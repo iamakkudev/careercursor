@@ -87,6 +87,9 @@ export const qualifyJobs = async(req,res)=>{
 
 export const moreJob = async(req, res) =>{
     try {
+         if (!req.session.passion && !req.session.qualify) {
+                return res.status(401).json({ message: "Session expired or not set" });
+            }
         const userInput = req.session.passion || req.session.qualify;
         if (!userInput) return res.status(400).json({ message: "No previous input found. Please enter passion or qualification first." });
 

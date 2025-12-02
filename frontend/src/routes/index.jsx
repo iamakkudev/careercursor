@@ -14,27 +14,14 @@ import JobListPage from '../pages/job/JobListPage'
 import RoadmapPage from '../pages/job/RoadmapPage'
 import LoginPage from '../pages/user/LoginPage'
 import ForgotPassword from '../pages/user/ForgotPassword'
-import { useAuthStore } from '../store/AuthStore'
-import { Navigate } from 'react-router-dom'
 
-
-// redirect authenticated users to the home page
-const RedirectAuthenticatedUser = ({ children }) => {
-  const { isAuthenticated, user } = useAuthStore();
-
-  if (isAuthenticated && user.isVerified) {
-    return <Navigate to='/' replace />;
-  }
-
-  return children;
-};
 
 export const authRoutes = [
-  { path: '/login', element: <RedirectAuthenticatedUser><LoginPage /> </RedirectAuthenticatedUser>},
-  { path: '/signup', element: <RedirectAuthenticatedUser><SignupPage /> </RedirectAuthenticatedUser>},
-  { path: '/forgot-password', element: <RedirectAuthenticatedUser><ForgotPassword /></RedirectAuthenticatedUser> },
+  { path: '/login', element: <LoginPage />},
+  { path: '/signup', element: <SignupPage /> },
+  { path: '/forgot-password', element: <ForgotPassword /> },
   { path: '/verify-email', element: <VerifyEmail /> },
-  { path: '/reset-password/:token', element: <RedirectAuthenticatedUser><ResetPassword /></RedirectAuthenticatedUser> },
+  { path: '/reset-password/:token', element: <ResetPassword /> },
   
 ]
 

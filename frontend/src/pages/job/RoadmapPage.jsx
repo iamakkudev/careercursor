@@ -7,13 +7,11 @@ import { useEffect, useState } from 'react';
 const RoadmapPage = () => {
   const [mounted, setMounted] = useState(false);
 
-  const { job, error, isLoading } = useRoadmapStore()
+  const { job, error, isLoading,get } = useRoadmapStore()
   const newerror = error || "Data not available";
   useEffect(() => {
     if (roadmapData) setMounted(true);
   }, [roadmapData]);
-
-  console.log(roadmapData)
 
   if(isLoading) return <div className='text-xl text-center font-bold my-auto'>Loding....</div>
   if(error||!roadmapData) return <div className='text-center font-bold text-red-600 text-xl my-auto'>{newerror}</div>

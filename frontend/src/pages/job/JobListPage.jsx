@@ -2,7 +2,7 @@ import JobCard from '../../components/JobCard';
 import { useJoblistStore } from '../../store/joblistStore.js';
 import { useRoadmapStore } from '../../store/roadmapStore.js';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import {joblist} from '../../info.js'
+// import {joblist} from '../../info.js'
 
 const JobListPage = () => {
   const { getJobRoadmap } = useRoadmapStore();
@@ -11,20 +11,20 @@ const JobListPage = () => {
   const [searchParams] = useSearchParams();
   const type = searchParams.get("q");
 
-  // if (!type) {
-  //   return <div className="p-8 text-center text-gray-500">No job type selected.</div>;
-  // }
+  if (!type) {
+    return <div className="p-8 text-center text-gray-500">No job type selected.</div>;
+  }
 
-  // const joblist = list[type];
+  const joblist = list[type];
 
   const handleJob = async (job) => {
-    // try {
-    //   await getJobRoadmap(job);
-    //   navigate("/roadmap");
-    // } catch (err) {
-    //   console.error(err);
-    //   alert("Failed to fetch roadmap. Try again.");
-    // }
+    try {
+      navigate("/roadmap");
+      await getJobRoadmap(job);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to fetch roadmap. Try again.");
+    }
   };
 
   return (

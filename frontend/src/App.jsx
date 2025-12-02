@@ -5,6 +5,7 @@ import Footer from './components/Footer.jsx'
 import { useAuthStore } from './store/AuthStore.js';
 import { useEffect } from 'react';
 import {Toaster} from 'react-hot-toast'
+import NotFoundPage from './pages/NotFoundPage.jsx';
 
 // protect routes that require authentication
 const ProtectedRoute = ({ children }) => {
@@ -24,14 +25,25 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
+// redirect authenticated users to the home page
+const RedirectAuthenticatedUser = ({ children }) => {
+  const { isAuthenticated, user } = useAuthStore();
+
+  if (isAuthenticated && user.isVerified) {
+    return <Navigate to='/' replace />;
+  }
+
+  return children;
+};
+
+
 
 
 const App = () => {
   const {checkAuth} = useAuthStore();
   useEffect(() => {
     checkAuth()
-  }, [checkAuth])
-
+  }, [checkAuth]);
   
   return (
     <div >
@@ -43,7 +55,7 @@ const App = () => {
         <Routes>
         {
         authRoutes.map(({path, element}, i) =>(
-          <Route key={i} path={path} element={element}/>
+          <Route key={i} path={path} element={<RedirectAuthenticatedUser>{element}</RedirectAuthenticatedUser>}/>
         ))
         }
         {
@@ -51,6 +63,10 @@ const App = () => {
           <Route key={i} path={path} element={<ProtectedRoute>{element}</ProtectedRoute>} />
         ))
         }
+        <Route
+          path="*"
+          element={<NotFoundPage />}
+        />
       </Routes>
       </main>
       

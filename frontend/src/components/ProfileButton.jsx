@@ -9,7 +9,7 @@ const ProfileButton = () => {
       <div className="dropdown relative dropdown-hover">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
-          <img src={user?.profilpic || "/avatar.png"} alt="" className='size-20'/>
+          <img src={user?.profilePic?.link || "./avatar.png"} alt="" className='size-20'/>
         </div>
       </div>
       <ul

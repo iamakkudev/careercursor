@@ -26,7 +26,7 @@ const PORT = process.env.PORT||8080
 const sessionOptions = {
     secret: process.env.SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
         expires: Date.now() + 60 * 60 * 1000,
         maxAge: 60 * 60 * 1000,
