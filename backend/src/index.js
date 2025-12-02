@@ -13,8 +13,8 @@ const app = express();
 
 // CORS configuration
 app.use(cors({
-  origin: "http://localhost:5173", 
-  credentials: true 
+  origin: "http://localhost:5173",
+  credentials: true
 }));
 
 
@@ -34,6 +34,13 @@ const sessionOptions = {
 }
 }
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+  app.get("/*path", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  });
+}
 
 
 // Middleware
@@ -46,7 +53,7 @@ app.use(session(sessionOptions))
 app.use("/auth",authRoutes)
 app.use("/job",jobRoutes)
 app.use("/roadmap",roadmapRoutes)
-        
+
 
 app.listen(PORT,()=>{
     console.log(`server is running on ${PORT}`);
