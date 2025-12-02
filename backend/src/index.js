@@ -12,8 +12,7 @@ import { fileURLToPath } from 'url'
 
 dotenv.config()
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+const __dirname = path.resolve
 
 const app = express()
 const PORT = process.env.PORT || 8080
@@ -48,7 +47,7 @@ app.use("/roadmap", roadmapRoutes)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")))
 
-  app.get("*", (req, res) => {
+  app.get("/*path", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/dist/index.html"))
   })
 }
